@@ -20,9 +20,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git@bitbucket.org:michaellasmanis/javapatterns.git</connection>
-        <developerConnection>scm:git:git@bitbucket.org:michaellasmanis/javapatterns.git</developerConnection>
-        <url>https://bitbucket.org/michaellasmanis/javapatterns</url>
+        <connection>scm:git:git@github.com:michaellasmanis/javapatterns.git</connection>
+        <developerConnection>scm:git:git@github.com:michaellasmanis/javapatterns.git</developerConnection>
+        <url>https://github.com/michaellasmanis/javapatterns</url>
     </scm>
 
     <organization>
