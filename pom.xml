@@ -3,7 +3,7 @@
 
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 
     <packaging>jar</packaging>
 
@@ -81,7 +81,6 @@
                 <version>${jgitflow.version}</version>
                 <configuration>
                     <enableSshAgent>true</enableSshAgent>
-                    <noDeploy>true</noDeploy>
                 </configuration>
             </plugin>
             <plugin>
