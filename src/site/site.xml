@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Design Patterns for Java">
+    <body>
+        <menu name="Main">
+            <item name="Overview" href="overview.html"/>
+            <item name="License" href="license.html"/>
+            <item name="API Docs" href="apidocs/index.html"/>
+            <item name="Test Docs" href="testapidocs/index.html"/>
+        </menu>
+        <menu ref="reports" />
+    </body>
+</project>

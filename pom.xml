@@ -1,0 +1,243 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lasmanis</groupId>
+    <artifactId>javapatterns</artifactId>
+    <version>1.0</version>
+
+    <packaging>jar</packaging>
+
+    <name>Design Patterns for Java</name>
+    <description>Design patterns and implementations for Java</description>
+    <url>http://oss.lasmanis.com/javapatterns</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git@github.com:michaellasmanis/javapatterns.git</connection>
+        <developerConnection>scm:git:git@github.com:michaellasmanis/javapatterns.git</developerConnection>
+        <url>https://github.com/michaellasmanis/javapatterns</url>
+    </scm>
+
+    <organization>
+        <name>Michael Lasmanis</name>
+        <url>http://lasmanis.com/</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>mpl</id>
+            <name>Michael lasmanis</name>
+            <organization>Michael Lasmanis</organization>
+            <email>michael@lasmanis.com</email>
+        </developer>
+    </developers>
+
+    <prerequisites>
+        <maven>2.2.1</maven>
+    </prerequisites>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <clirr.version>2.6</clirr.version>
+        <doxia.version>1.4</doxia.version>
+        <javadoc.version>2.9.1</javadoc.version>
+        <jgitflow.version>1.0-alpha21.1</jgitflow.version>
+        <junit.version>4.11</junit.version>
+        <maven-clean.version>2.5</maven-clean.version>
+        <maven-compiler.version>3.1</maven-compiler.version>
+        <maven-deploy.version>2.8</maven-deploy.version>
+        <maven-install.version>2.5</maven-install.version>
+        <maven-jar.version>2.4</maven-jar.version>
+        <maven-project-reports.version>2.7</maven-project-reports.version>
+        <maven-resources.version>2.6</maven-resources.version>
+        <maven-site.version>3.3</maven-site.version>
+        <maven-source.version>2.2.1</maven-source.version>
+        <surefire.version>2.16</surefire.version>
+        <s3-wagon.version>1.1.22</s3-wagon.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-jgitflow-plugin</artifactId>
+                <version>${jgitflow.version}</version>
+                <configuration>
+                    <enableSshAgent>true</enableSshAgent>
+                    <noDeploy>true</noDeploy>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler.version}</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${maven-deploy.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${maven-install.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.version}</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                    <fixTags>all</fixTags>
+                    <links>
+                        <link>http://docs.oracle.com/javaee/6/api/</link>
+                    </links>
+                    <doctitle>${project.name} ${project.version}</doctitle>
+                    <windowtitle>${project.name} ${project.version}</windowtitle>
+                    <testDoctitle>${project.name} ${project.version} Tests</testDoctitle>
+                    <testWindowtitle>${project.name} ${project.version} Tests</testWindowtitle>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-reports.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>${doxia.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <version>${clirr.version}</version>
+                <configuration>
+                    <failOnWarning>true</failOnWarning>
+                </configuration>
+            </plugin>
+        </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.kuali.maven.wagons</groupId>
+                <artifactId>maven-s3-wagon</artifactId>
+                <version>${s3-wagon.version}</version>
+            </extension>
+        </extensions>
+     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.version}</version>
+                <configuration>
+                    <show>protected</show>
+                    <nohelp>false</nohelp>
+                    <links>
+                        <link>http://docs.oracle.com/javaee/6/api/</link>
+                    </links>
+                    <doctitle>${project.name} ${project.version}</doctitle>
+                    <windowtitle>${project.name} ${project.version}</windowtitle>
+                    <testDoctitle>${project.name} ${project.version} Tests</testDoctitle>
+                    <testWindowtitle>${project.name} ${project.version} Tests</testWindowtitle>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>clirr-maven-plugin</artifactId>
+                <version>${clirr.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
+    <distributionManagement>
+        <repository>
+            <id>aws-release</id>
+            <url>s3://oss.lasmanis.com/repository/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>aws-snapshot</id>
+            <url>s3://oss.lasmanis.com/repository/snapshot</url>
+        </snapshotRepository>
+        <site>
+            <id>aws-website</id>
+            <url>s3://oss.lasmanis.com/javapatterns</url>
+        </site>
+    </distributionManagement>
+
+</project>
