@@ -81,7 +81,6 @@
                 <version>${jgitflow.version}</version>
                 <configuration>
                     <enableSshAgent>true</enableSshAgent>
-                    <noDeploy>true</noDeploy>
                 </configuration>
             </plugin>
             <plugin>
