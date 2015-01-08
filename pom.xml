@@ -115,6 +115,9 @@ limitations under the License.
                 <configuration>
                     <enableSshAgent>true</enableSshAgent>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <pushFeatures>true</pushFeatures>
+                    <pushReleases>true</pushReleases>
+                    <pushHotfixes>true</pushHotfixes>
                 </configuration>
             </plugin>
             <plugin>
