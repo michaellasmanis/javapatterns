@@ -182,7 +182,8 @@ public class Singleton
                 }
 
                 // get the default constructor and make it accessible to us
-                Constructor<U> ctor = c.getDeclaredConstructor(new Class[0]);
+                Class[] typeList = { };
+                Constructor<U> ctor = c.getDeclaredConstructor(typeList);
                 ctor.setAccessible(true);
 
                 // create the new instance and save it
