@@ -89,6 +89,7 @@ limitations under the License.
         <maven-gpg.version>1.5</maven-gpg.version>
         <maven-install.version>2.5.2</maven-install.version>
         <maven-jar.version>2.5</maven-jar.version>
+        <maven-jxr.version>2.5</maven-jxr.version>
         <maven-project-reports.version>2.7</maven-project-reports.version>
         <maven-resources.version>2.7</maven-resources.version>
         <maven-site.version>3.4</maven-site.version>
@@ -308,6 +309,11 @@ limitations under the License.
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
                 <version>${clirr.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${maven-jxr.version}</version>
             </plugin>
         </plugins>
     </reporting>
