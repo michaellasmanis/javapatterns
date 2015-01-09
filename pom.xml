@@ -27,7 +27,7 @@ limitations under the License.
 
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
 
     <packaging>jar</packaging>
 
@@ -182,7 +182,7 @@ limitations under the License.
                     <nohelp>true</nohelp>
                     <fixTags>all</fixTags>
                     <links>
-                        <link>http://docs.oracle.com/javaee/6/api/</link>
+                        <link>http://docs.oracle.com/javaee/7/api/</link>
                     </links>
                     <doctitle>${project.name} ${project.version}</doctitle>
                     <windowtitle>${project.name} ${project.version}</windowtitle>
