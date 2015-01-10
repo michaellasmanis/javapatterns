@@ -18,7 +18,7 @@ package com.lasmanis.javapatterns.singletonhelpers;
 import com.lasmanis.javapatterns.Singleton;
 
 /**
- * Derived class for testing {@link com.lasmanis.javapatterns.Singleton}
+ * Testing {@link String} derived class for testing {@link com.lasmanis.javapatterns.Singleton}
  *
  * @author Michael Lasmanis <a href="mailto:michael@lasmanis.com">michael@lasmanis.com</a>
  */
