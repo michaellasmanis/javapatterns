@@ -79,7 +79,7 @@ limitations under the License.
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <clirr.version>2.6.1</clirr.version>
         <doxia.version>1.6</doxia.version>
-        <javadoc.version>2.10.1</javadoc.version>
+        <javadoc.version>2.9.1</javadoc.version>
         <jgitflow.version>1.0-m4.3</jgitflow.version>
         <junit.version>4.12</junit.version>
         <maven.version>2.2.1</maven.version>
