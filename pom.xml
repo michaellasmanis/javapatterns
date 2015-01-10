@@ -27,7 +27,7 @@ limitations under the License.
 
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5</version>
 
     <packaging>jar</packaging>
 
@@ -79,7 +79,7 @@ limitations under the License.
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <clirr.version>2.6.1</clirr.version>
         <doxia.version>1.6</doxia.version>
-        <javadoc.version>2.10.1</javadoc.version>
+        <javadoc.version>2.9.1</javadoc.version>
         <jgitflow.version>1.0-m4.3</jgitflow.version>
         <junit.version>4.12</junit.version>
         <maven.version>2.2.1</maven.version>
@@ -89,6 +89,7 @@ limitations under the License.
         <maven-gpg.version>1.5</maven-gpg.version>
         <maven-install.version>2.5.2</maven-install.version>
         <maven-jar.version>2.5</maven-jar.version>
+        <maven-jxr.version>2.5</maven-jxr.version>
         <maven-project-reports.version>2.7</maven-project-reports.version>
         <maven-resources.version>2.7</maven-resources.version>
         <maven-site.version>3.4</maven-site.version>
@@ -308,6 +309,11 @@ limitations under the License.
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
                 <version>${clirr.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>${maven-jxr.version}</version>
             </plugin>
         </plugins>
     </reporting>
