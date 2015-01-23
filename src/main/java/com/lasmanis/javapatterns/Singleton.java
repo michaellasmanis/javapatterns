@@ -93,7 +93,7 @@ public class Singleton
 
     /**
      * Constructor.
-     * <p/>
+     * <p>
      * Scope is protected for instantiation control.
      */
     protected Singleton()
