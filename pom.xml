@@ -49,7 +49,7 @@ limitations under the License.
         <developerConnection>scm:git:git@github.com:michaellasmanis/javapatterns.git</developerConnection>
         <url>scm:git:git@github.com:michaellasmanis/javapatterns.git</url>
     </scm>
-    
+
     <issueManagement>
         <url>https://github.com/michaellasmanis/javapatterns/issues</url>
         <system>GitHub Issues</system>
@@ -326,7 +326,7 @@ limitations under the License.
 
     <distributionManagement>
         <site>
-            <id>aws-website</id>
+            <id>oss-lasmanis-website</id>
             <url>s3://oss.lasmanis.com/javapatterns</url>
         </site>
     </distributionManagement>
