@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright © 2013-2017 Michael Lasmanis (michael@lasmanis.com)
+    Copyright © 2013 Michael Lasmanis (michael@lasmanis.com)
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -19,12 +19,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
     <version>1.1.8-SNAPSHOT</version>
@@ -34,7 +28,7 @@
     <name>Design Patterns for Java</name>
     <description>Design patterns and implementations for Java</description>
     <url>http://oss.lasmanis.com/javapatterns</url>
-    <inceptionYear>2013-2017</inceptionYear>
+    <inceptionYear>2013</inceptionYear>
 
     <licenses>
         <license>
@@ -45,9 +39,11 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git@github.com:michaellasmanis/javapatterns.git</connection>
-        <developerConnection>scm:git:git@github.com:michaellasmanis/javapatterns.git</developerConnection>
+        <!-- git@github.com:michaellasmanis/javapatterns.git -->
+        <connection>scm:git:ssh://github.com/michaellasmanis/javapatterns.git</connection>
         <url>https://github.com/michaellasmanis/javapatterns</url>
+        <developerConnection>scm:git:ssh://github.com/michaellasmanis/javapatterns.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>
@@ -57,7 +53,7 @@
 
     <organization>
         <name>Michael Lasmanis</name>
-        <url>http://lasmanis.com/opensource/</url>
+        <url>https://github.com/michaellasmanis/</url>
     </organization>
 
     <developers>
@@ -65,6 +61,7 @@
             <id>mpl</id>
             <name>Michael Lasmanis</name>
             <organization>Michael Lasmanis</organization>
+            <organizationUrl>https://github.com/michaellasmanis/</organizationUrl>
             <email>michael@lasmanis.com</email>
             <url>http://lasmanis.com/</url>
         </developer>
@@ -81,6 +78,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <target-java.version>1.8</target-java.version>
 
+        <!-- signing -->
+        <pgp.secretkey>keyring:id=michael@lasmanis.com</pgp.secretkey>
+        <pgp.passphrase>gpg-agent:</pgp.passphrase>
+
+        <!-- copyright -->
+        <copyright.owner>Michael Lasmanis</copyright.owner>
+        <copyright.email>michael@lasmanis.com</copyright.email>
+        
         <!-- dependencies -->
         <junit.version>4.12</junit.version>
 
@@ -171,8 +176,8 @@
                 <artifactId>pgp-maven-plugin</artifactId>
                 <version>${pgp-maven.version}</version>
                 <configuration>
-                    <secretkey>keyring:id=michael@lasmanis.com</secretkey>
-                    <passphrase>gpg-agent:</passphrase>
+                    <secretkey>${pgp.secretkey}</secretkey>
+                    <passphrase>${pgp.passphrase}</passphrase>
                 </configuration>
                 <executions>
                     <execution>
@@ -276,8 +281,8 @@
                 <configuration>
                     <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
                     <properties>
-                        <owner>Michael Lasmanis</owner>
-                        <email>michael@lasmanis.com</email>
+                        <owner>${copyright.owner}</owner>
+                        <email>${copyright.email}</email>
                     </properties>
                     <excludes>
                         <exclude>nb-licenseheader.txt</exclude>
@@ -438,10 +443,34 @@
     </reporting>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
         <site>
             <id>oss-lasmanis-website</id>
             <url>s3://oss.lasmanis.com/javapatterns</url>
         </site>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
