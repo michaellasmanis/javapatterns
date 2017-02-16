@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <!--
 
     Copyright © 2013 Michael Lasmanis (michael@lasmanis.com)
@@ -16,14 +16,8 @@
     limitations under the License.
 
 -->
-<project name="Design Patterns for Java">
-    <body>
-        <menu name="Main">
-            <item name="Overview" href="overview.html"/>
-            <item name="License" href="license.html"/>
-            <item name="API Docs" href="apidocs/index.html"/>
-            <item name="Test Docs" href="testapidocs/index.html"/>
-        </menu>
-        <menu ref="reports" />
-    </body>
-</project>
+<!DOCTYPE suppressions PUBLIC
+    "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+    "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+<suppressions>
+</suppressions>
