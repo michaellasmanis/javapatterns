@@ -21,13 +21,12 @@
 
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
-    <version>1.1.8</version>
+    <version>1.1.9</version>
 
     <packaging>jar</packaging>
 
     <name>Design Patterns for Java</name>
     <description>Design patterns and implementations for Java</description>
-    <url>http://oss.lasmanis.com/javapatterns</url>
     <inceptionYear>2013</inceptionYear>
 
     <licenses>
@@ -37,19 +36,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <scm>
-        <!-- git@github.com:michaellasmanis/javapatterns.git -->
-        <connection>scm:git:ssh://github.com/michaellasmanis/javapatterns.git</connection>
-        <url>https://github.com/michaellasmanis/javapatterns</url>
-        <developerConnection>scm:git:ssh://github.com/michaellasmanis/javapatterns.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
-
-    <issueManagement>
-        <url>https://github.com/michaellasmanis/javapatterns/issues</url>
-        <system>GitHub Issues</system>
-    </issueManagement>
 
     <organization>
         <name>Michael Lasmanis</name>
@@ -78,6 +64,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <target-java.version>1.8</target-java.version>
 
+        <!-- scm & site publish -->
+        <repository.domain>github.com</repository.domain>
+        <repository.user>michaellasmanis</repository.user>
+        <repository.name>javapatterns</repository.name>
+        <scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>            <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
+        <scm-publish.pubScmUrl>scm:git:git@${repository.domain}:${repository.user}/${repository.name}.git</scm-publish.pubScmUrl>
+        <scm-publish.siteDocOuputDirectory>${project.reporting.outputDirectory}</scm-publish.siteDocOuputDirectory>
+            
         <!-- signing -->
         <pgp.secretkey>keyring:id=michael@lasmanis.com</pgp.secretkey>
         <pgp.passphrase>gpg-agent:</pgp.passphrase>
@@ -109,6 +103,7 @@
         <maven-pmd.version>3.6</maven-pmd.version>
         <maven-project-info-reports.version>2.9</maven-project-info-reports.version>
         <maven-resources.version>3.0.1</maven-resources.version>
+        <maven-scm-publish.version>1.1</maven-scm-publish.version>
         <!--<maven-shade.version>2.4.3</maven-shade.version>-->
         <maven-site.version>3.5.1</maven-site.version>
         <maven-source.version>3.0.1</maven-source.version>
@@ -116,6 +111,21 @@
         <maven-s3-wagon.version>1.2.2</maven-s3-wagon.version>
         <versions-maven.version>2.3</versions-maven.version>
     </properties>
+
+    <url>https://${repository.domain}/${repository.user}/${repository.name}</url>
+
+    <scm>
+        <connection>scm:git:ssh://${repository.domain}/${repository.user}/${repository.name}.git</connection>
+        <url>https://${repository.domain}/${repository.user}/${repository.name}</url>
+        <developerConnection>scm:git:ssh://${repository.domain}/${repository.user}/${repository.name}.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <url>https://${repository.domain}/${repository.user}/${repository.name}/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
 
     <dependencies>
         <dependency>
@@ -375,6 +385,20 @@
                     </execution>
                 </executions>
             </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+                <version>${maven-scm-publish.version}</version>
+                <configuration>
+                    <checkoutDirectory>${scmPublish.checkoutDirectory}</checkoutDirectory>
+                    <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}
+                    </checkinComment>
+                    <content>${scm-publish.siteDocOuputDirectory}</content>
+                    <skipDeletedFiles>true</skipDeletedFiles>
+                    <pubScmUrl>${scm-publish.pubScmUrl}</pubScmUrl>
+                    <scmBranch>${scm-publish.scmBranch}</scmBranch>
+                </configuration>
+            </plugin>
         </plugins>
         <extensions>
             <extension>
