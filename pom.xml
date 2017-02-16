@@ -19,12 +19,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
     <version>1.1.8-SNAPSHOT</version>
@@ -48,8 +42,7 @@
         <!-- git@github.com:michaellasmanis/javapatterns.git -->
         <connection>scm:git:ssh://github.com/michaellasmanis/javapatterns.git</connection>
         <url>https://github.com/michaellasmanis/javapatterns</url>
-        <developerConnection>scm:git:ssh://github.com/michaellasmanis/javapatterns.git
-        </developerConnection>
+        <developerConnection>scm:git:ssh://github.com/michaellasmanis/javapatterns.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
@@ -68,6 +61,7 @@
             <id>mpl</id>
             <name>Michael Lasmanis</name>
             <organization>Michael Lasmanis</organization>
+            <organizationUrl>https://github.com/michaellasmanis/</organizationUrl>
             <email>michael@lasmanis.com</email>
             <url>http://lasmanis.com/</url>
         </developer>
@@ -449,10 +443,34 @@
     </reporting>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>sonatype-nexus-staging</id>
+            <name>Nexus Release Repository</name>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
         <site>
             <id>oss-lasmanis-website</id>
             <url>s3://oss.lasmanis.com/javapatterns</url>
         </site>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snapshots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
