@@ -27,7 +27,6 @@
 
     <name>Design Patterns for Java</name>
     <description>Design patterns and implementations for Java</description>
-    <url>http://oss.lasmanis.com/javapatterns</url>
     <inceptionYear>2013</inceptionYear>
 
     <licenses>
@@ -112,6 +111,8 @@
         <maven-s3-wagon.version>1.2.2</maven-s3-wagon.version>
         <versions-maven.version>2.3</versions-maven.version>
     </properties>
+
+    <url>https://${repository.domain}/${repository.user}/${repository.name}</url>
 
     <scm>
         <connection>scm:git:ssh://${repository.domain}/${repository.user}/${repository.name}.git</connection>
