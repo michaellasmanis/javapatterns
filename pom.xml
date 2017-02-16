@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-Copyright 2013 Michael Lasmanis.
+    Copyright © 2013-2017 Michael Lasmanis (michael@lasmanis.com)
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-     http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -34,7 +34,7 @@ limitations under the License.
     <name>Design Patterns for Java</name>
     <description>Design patterns and implementations for Java</description>
     <url>http://oss.lasmanis.com/javapatterns</url>
-    <inceptionYear>2013</inceptionYear>
+    <inceptionYear>2013-2017</inceptionYear>
 
     <licenses>
         <license>
@@ -47,7 +47,7 @@ limitations under the License.
     <scm>
         <connection>scm:git:git@github.com:michaellasmanis/javapatterns.git</connection>
         <developerConnection>scm:git:git@github.com:michaellasmanis/javapatterns.git</developerConnection>
-        <url>scm:git:git@github.com:michaellasmanis/javapatterns.git</url>
+        <url>https://github.com/michaellasmanis/javapatterns</url>
     </scm>
 
     <issueManagement>
@@ -63,7 +63,7 @@ limitations under the License.
     <developers>
         <developer>
             <id>mpl</id>
-            <name>Michael lasmanis</name>
+            <name>Michael Lasmanis</name>
             <organization>Michael Lasmanis</organization>
             <email>michael@lasmanis.com</email>
             <url>http://lasmanis.com/</url>
@@ -75,28 +75,41 @@ limitations under the License.
     </prerequisites>
 
     <properties>
+        <maven.version>3.0</maven.version>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <target-java.version>1.8</target-java.version>
-        <clirr.version>2.6.1</clirr.version>
-        <doxia.version>1.6</doxia.version>
-        <javadoc.version>2.9.1</javadoc.version>
-        <jgitflow.version>1.0-m4.3</jgitflow.version>
+
+        <!-- dependencies -->
         <junit.version>4.12</junit.version>
-        <maven.version>2.2.1</maven.version>
-        <maven-clean.version>2.6.1</maven-clean.version>
-        <maven-compiler.version>3.2</maven-compiler.version>
+
+        <!-- plugins/extensions -->
+        <build-helper-maven.version>1.12</build-helper-maven.version>
+        <clirr-maven.version>2.8</clirr-maven.version>
+        <doxia-module-markdown.version>1.7</doxia-module-markdown.version>
+        <exec-maven.version>1.5.0</exec-maven.version>
+        <jacoco-maven.version>0.7.7.201606060606</jacoco-maven.version>
+        <jgitflow-maven.version>1.0-m5.1</jgitflow-maven.version>
+        <license-maven.version>3.0</license-maven.version>
+        <maven-checkstyle.version>2.17</maven-checkstyle.version>
+        <maven-clean.version>3.0.0</maven-clean.version>
+        <maven-compiler.version>3.5.1</maven-compiler.version>
         <maven-deploy.version>2.8.2</maven-deploy.version>
-        <maven-gpg.version>1.5</maven-gpg.version>
+        <pgp-maven.version>1.1</pgp-maven.version>
         <maven-install.version>2.5.2</maven-install.version>
-        <maven-jar.version>2.5</maven-jar.version>
+        <maven-jar.version>3.0.2</maven-jar.version>
+        <maven-javadoc.version>2.10.4</maven-javadoc.version>
         <maven-jxr.version>2.5</maven-jxr.version>
-        <maven-project-reports.version>2.7</maven-project-reports.version>
-        <maven-resources.version>2.7</maven-resources.version>
-        <maven-site.version>3.4</maven-site.version>
-        <maven-source.version>2.4</maven-source.version>
-        <surefire.version>2.18.1</surefire.version>
-        <s3-wagon.version>1.1.22</s3-wagon.version>
+        <maven-pmd.version>3.6</maven-pmd.version>
+        <maven-project-info-reports.version>2.9</maven-project-info-reports.version>
+        <maven-resources.version>3.0.1</maven-resources.version>
+        <!--<maven-shade.version>2.4.3</maven-shade.version>-->
+        <maven-site.version>3.5.1</maven-site.version>
+        <maven-source.version>3.0.1</maven-source.version>
+        <maven-surefire.version>2.19.1</maven-surefire.version>
+        <maven-s3-wagon.version>1.2.2</maven-s3-wagon.version>
+        <versions-maven.version>2.3</versions-maven.version>
     </properties>
 
     <dependencies>
@@ -109,11 +122,18 @@ limitations under the License.
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
-                <version>${jgitflow.version}</version>
+                <version>${jgitflow-maven.version}</version>
                 <configuration>
                     <enableSshAgent>true</enableSshAgent>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
@@ -134,7 +154,9 @@ limitations under the License.
                 <configuration>
                     <source>${target-java.version}</source>
                     <target>${target-java.version}</target>
-                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <compilerArgs>
+                        <arg>-Xlint:all</arg>
+                    </compilerArgs>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -145,19 +167,15 @@ limitations under the License.
                 <version>${maven-deploy.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg.version}</version>
+                <groupId>org.kohsuke</groupId>
+                <artifactId>pgp-maven-plugin</artifactId>
+                <version>${pgp-maven.version}</version>
                 <configuration>
-                    <gpgArguments>
-                        <arg>--batch</arg>
-                    </gpgArguments>
-                    <keyname>michael@lasmanis.com</keyname>
+                    <secretkey>keyring:id=michael@lasmanis.com</secretkey>
+                    <passphrase>gpg-agent:</passphrase>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
                         <goals>
                             <goal>sign</goal>
                         </goals>
@@ -184,14 +202,11 @@ limitations under the License.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${javadoc.version}</version>
+                <version>${maven-javadoc.version}</version>
                 <configuration>
                     <show>private</show>
                     <nohelp>true</nohelp>
-                    <fixTags>all</fixTags>
-                    <links>
-                        <link>http://docs.oracle.com/javaee/7/api/</link>
-                    </links>
+                    <fixTags>author,since,param,return,throws,link</fixTags>
                     <doctitle>${project.name} ${project.version}</doctitle>
                     <windowtitle>${project.name} ${project.version}</windowtitle>
                     <testDoctitle>${project.name} ${project.version} Tests</testDoctitle>
@@ -209,7 +224,7 @@ limitations under the License.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${maven-project-reports.version}</version>
+                <version>${maven-project-info-reports.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -224,7 +239,7 @@ limitations under the License.
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
                         <artifactId>doxia-module-markdown</artifactId>
-                        <version>${doxia.version}</version>
+                        <version>${doxia-module-markdown.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -244,22 +259,123 @@ limitations under the License.
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire.version}</version>
+                <version>${maven-surefire.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
-                <version>${clirr.version}</version>
+                <version>${clirr-maven.version}</version>
                 <configuration>
                     <failOnWarning>true</failOnWarning>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${license-maven.version}</version>
+                <configuration>
+                    <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
+                    <properties>
+                        <owner>Michael Lasmanis</owner>
+                        <email>michael@lasmanis.com</email>
+                    </properties>
+                    <excludes>
+                        <exclude>nb-licenseheader.txt</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>README.markdown</exclude>
+                    </excludes>
+                    <mapping>
+                        <markdown>DOUBLESLASH_STYLE</markdown>
+                        <copyright>TEXT</copyright>
+                        <NOTICE>TEXT</NOTICE>
+                    </mapping>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven.version}</version>
+                <executions>
+                    <execution>
+                        <id>pre-unit-test</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven.version}</version>
+                <configuration>
+                    <mainClass>${project.mainClass}</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>build-helper-maven-plugin</artifactId>
+              <version>${build-helper-maven.version}</version>
+              <executions>
+                <execution>
+                  <id>timestamp-property</id>
+                  <goals>
+                    <goal>timestamp-property</goal>
+                  </goals>
+                  <phase>validate</phase>
+                  <configuration>
+                    <name>current.year</name>
+                    <pattern>yyyy</pattern>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven.version}</version>
+            </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>true</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${project.mainClass}</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
         <extensions>
             <extension>
-                <groupId>org.kuali.maven.wagons</groupId>
+                <groupId>net.adamcin.org.kuali.maven.wagons</groupId>
                 <artifactId>maven-s3-wagon</artifactId>
-                <version>${s3-wagon.version}</version>
+                <version>${maven-s3-wagon.version}</version>
             </extension>
         </extensions>
     </build>
@@ -268,14 +384,16 @@ limitations under the License.
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${javadoc.version}</version>
+                <version>${maven-javadoc.version}</version>
                 <configuration>
                     <show>protected</show>
                     <nohelp>false</nohelp>
-                    <links>
-                        <link>http://docs.oracle.com/javaee/6/api/</link>
-                    </links>
                     <doctitle>${project.name} ${project.version}</doctitle>
                     <windowtitle>${project.name} ${project.version}</windowtitle>
                     <testDoctitle>${project.name} ${project.version} Tests</testDoctitle>
@@ -285,12 +403,36 @@ limitations under the License.
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>clirr-maven-plugin</artifactId>
-                <version>${clirr.version}</version>
+                <version>${clirr-maven.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
                 <version>${maven-jxr.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>${maven-pmd.version}</version>
+                <configuration>
+                    <linkXref>true</linkXref>
+                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                    <minimumTokens>100</minimumTokens>
+                    <targetJdk>${target-java.version}</targetJdk>
+                    <excludeRoots>
+                        <excludeRoot>target/generated-sources/xjc</excludeRoot>
+                    </excludeRoots>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle.version}</version>
+                <configuration>
+                    <enableRulesSummary>true</enableRulesSummary>
+                    <suppressionsLocation>checks/checkstyle-suppressions.xml</suppressionsLocation>
+                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
