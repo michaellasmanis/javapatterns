@@ -182,22 +182,6 @@
                 <version>${maven-deploy.version}</version>
             </plugin>
             <plugin>
-                <groupId>org.kohsuke</groupId>
-                <artifactId>pgp-maven-plugin</artifactId>
-                <version>${pgp-maven.version}</version>
-                <configuration>
-                    <secretkey>${pgp.secretkey}</secretkey>
-                    <passphrase>${pgp.passphrase}</passphrase>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
                 <version>${maven-install.version}</version>
@@ -497,4 +481,35 @@
         </repository>
     </repositories>
 
+    <profiles>
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.kohsuke</groupId>
+                        <artifactId>pgp-maven-plugin</artifactId>
+                        <version>${pgp-maven.version}</version>
+                        <configuration>
+                            <secretkey>${pgp.secretkey}</secretkey>
+                            <passphrase>${pgp.passphrase}</passphrase>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
