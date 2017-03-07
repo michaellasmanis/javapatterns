@@ -71,7 +71,7 @@
         <scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>            <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
         <scm-publish.pubScmUrl>scm:git:git@${repository.domain}:${repository.user}/${repository.name}.git</scm-publish.pubScmUrl>
         <scm-publish.siteDocOuputDirectory>${project.reporting.outputDirectory}</scm-publish.siteDocOuputDirectory>
-            
+
         <!-- signing -->
         <pgp.secretkey>keyring:id=michael@lasmanis.com</pgp.secretkey>
         <pgp.passphrase>gpg-agent:</pgp.passphrase>
@@ -79,7 +79,7 @@
         <!-- copyright -->
         <copyright.owner>Michael Lasmanis</copyright.owner>
         <copyright.email>michael@lasmanis.com</copyright.email>
-        
+
         <!-- dependencies -->
         <junit.version>4.12</junit.version>
 
@@ -144,6 +144,25 @@
             </resource>
         </resources>
 
+        <pluginManagement>
+            <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>${doxia-module-markdown.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
+                </configuration>
+            </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
@@ -382,6 +401,15 @@
                     <pubScmUrl>${scm-publish.pubScmUrl}</pubScmUrl>
                     <scmBranch>${scm-publish.scmBranch}</scmBranch>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>scm-publish</id>
+                        <phase>site-deploy</phase>
+                        <goals>
+                            <goal>publish-scm</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <extensions>
