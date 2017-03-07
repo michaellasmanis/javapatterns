@@ -489,10 +489,6 @@
             <name>Nexus Release Repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-        <site>
-            <id>oss-lasmanis-website</id>
-            <url>s3://oss.lasmanis.com/javapatterns</url>
-        </site>
     </distributionManagement>
 
     <repositories>
