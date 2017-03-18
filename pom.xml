@@ -21,7 +21,7 @@
 
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
-    <version>1.1.11</version>
+    <version>1.1.12</version>
 
     <packaging>jar</packaging>
 
@@ -68,13 +68,10 @@
         <repository.domain>github.com</repository.domain>
         <repository.user>michaellasmanis</repository.user>
         <repository.name>javapatterns</repository.name>
-        <scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>            <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
+        <scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>
+        <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
         <scm-publish.pubScmUrl>scm:git:git@${repository.domain}:${repository.user}/${repository.name}.git</scm-publish.pubScmUrl>
         <scm-publish.siteDocOuputDirectory>${project.reporting.outputDirectory}</scm-publish.siteDocOuputDirectory>
-
-        <!-- signing -->
-        <pgp.secretkey>keyring:id=michael@lasmanis.com</pgp.secretkey>
-        <pgp.passphrase>gpg-agent:</pgp.passphrase>
 
         <!-- copyright -->
         <copyright.owner>Michael Lasmanis</copyright.owner>
@@ -84,18 +81,17 @@
         <junit.version>4.12</junit.version>
 
         <!-- plugins/extensions -->
-        <build-helper-maven.version>1.12</build-helper-maven.version>
         <clirr-maven.version>2.8</clirr-maven.version>
         <doxia-module-markdown.version>1.7</doxia-module-markdown.version>
         <exec-maven.version>1.5.0</exec-maven.version>
         <jacoco-maven.version>0.7.7.201606060606</jacoco-maven.version>
         <jgitflow-maven.version>1.0-m5.1</jgitflow-maven.version>
         <license-maven.version>3.0</license-maven.version>
+        <maven-changes.version>2.12.1</maven-changes.version>
         <maven-checkstyle.version>2.17</maven-checkstyle.version>
         <maven-clean.version>3.0.0</maven-clean.version>
         <maven-compiler.version>3.5.1</maven-compiler.version>
         <maven-deploy.version>2.8.2</maven-deploy.version>
-        <pgp-maven.version>1.1</pgp-maven.version>
         <maven-install.version>2.5.2</maven-install.version>
         <maven-jar.version>3.0.2</maven-jar.version>
         <maven-javadoc.version>2.10.4</maven-javadoc.version>
@@ -104,12 +100,14 @@
         <maven-project-info-reports.version>2.9</maven-project-info-reports.version>
         <maven-resources.version>3.0.1</maven-resources.version>
         <maven-scm-publish.version>1.1</maven-scm-publish.version>
-        <!--<maven-shade.version>2.4.3</maven-shade.version>-->
         <maven-site.version>3.5.1</maven-site.version>
         <maven-source.version>3.0.1</maven-source.version>
         <maven-surefire.version>2.19.1</maven-surefire.version>
-        <maven-s3-wagon.version>1.2.2</maven-s3-wagon.version>
+        <pgp-maven.version>1.1</pgp-maven.version>
         <versions-maven.version>2.3</versions-maven.version>
+        
+        <!-- checkstyle configuration -->
+        <checkstyle.config.location>src/checkstyle/sun_checks.xml</checkstyle.config.location>
     </properties>
 
     <url>https://${repository.domain}/${repository.user}/${repository.name}</url>
@@ -123,7 +121,7 @@
 
     <issueManagement>
         <url>https://${repository.domain}/${repository.user}/${repository.name}/issues</url>
-        <system>GitHub Issues</system>
+        <system>GitHub</system>
     </issueManagement>
 
 
@@ -146,23 +144,24 @@
 
         <pluginManagement>
             <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>${maven-site.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>${doxia-module-markdown.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <skipDeploy>true</skipDeploy>
-                </configuration>
-            </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>${maven-site.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.doxia</groupId>
+                            <artifactId>doxia-module-markdown</artifactId>
+                            <version>${doxia-module-markdown.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <skipDeploy>true</skipDeploy>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
+
         <plugins>
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
@@ -174,6 +173,7 @@
                     <pushFeatures>true</pushFeatures>
                     <pushReleases>true</pushReleases>
                     <pushHotfixes>true</pushHotfixes>
+                    <goals>clean,deploy,site-deploy</goals>
                 </configuration>
             </plugin>
             <plugin>
@@ -222,7 +222,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc.version}</version>
                 <configuration>
-                    <show>private</show>
+                    <show>protected</show>
                     <nohelp>true</nohelp>
                     <fixTags>author,since,param,return,throws,link</fixTags>
                     <doctitle>${project.name} ${project.version}</doctitle>
@@ -298,13 +298,13 @@
                         <email>${copyright.email}</email>
                     </properties>
                     <excludes>
-                        <exclude>nb-licenseheader.txt</exclude>
                         <exclude>LICENSE</exclude>
                         <exclude>README.markdown</exclude>
+                        <exclude>src/checkstyle/sun_checks.xml</exclude>
+                        <exclude>src/site/markdown/*</exclude>
                     </excludes>
                     <mapping>
                         <markdown>DOUBLESLASH_STYLE</markdown>
-                        <copyright>TEXT</copyright>
                         <NOTICE>TEXT</NOTICE>
                     </mapping>
                 </configuration>
@@ -345,49 +345,10 @@
                 </configuration>
             </plugin>
             <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>build-helper-maven-plugin</artifactId>
-              <version>${build-helper-maven.version}</version>
-              <executions>
-                <execution>
-                  <id>timestamp-property</id>
-                  <goals>
-                    <goal>timestamp-property</goal>
-                  </goals>
-                  <phase>validate</phase>
-                  <configuration>
-                    <name>current.year</name>
-                    <pattern>yyyy</pattern>
-                  </configuration>
-                </execution>
-              </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>${versions-maven.version}</version>
             </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven-shade.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>true</createDependencyReducedPom>
-                            <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>${project.mainClass}</mainClass>
-                                </transformer>
-                            </transformers>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-publish-plugin</artifactId>
@@ -412,13 +373,6 @@
                 </executions>
             </plugin>
         </plugins>
-        <extensions>
-            <extension>
-                <groupId>net.adamcin.org.kuali.maven.wagons</groupId>
-                <artifactId>maven-s3-wagon</artifactId>
-                <version>${maven-s3-wagon.version}</version>
-            </extension>
-        </extensions>
     </build>
 
     <reporting>
@@ -434,7 +388,7 @@
                 <version>${maven-javadoc.version}</version>
                 <configuration>
                     <show>protected</show>
-                    <nohelp>false</nohelp>
+                    <nohelp>true</nohelp>
                     <doctitle>${project.name} ${project.version}</doctitle>
                     <windowtitle>${project.name} ${project.version}</windowtitle>
                     <testDoctitle>${project.name} ${project.version} Tests</testDoctitle>
@@ -458,11 +412,8 @@
                 <configuration>
                     <linkXref>true</linkXref>
                     <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <minimumTokens>100</minimumTokens>
                     <targetJdk>${target-java.version}</targetJdk>
-                    <excludeRoots>
-                        <excludeRoot>target/generated-sources/xjc</excludeRoot>
-                    </excludeRoots>
+                    <skipEmptyReport>false</skipEmptyReport>
                 </configuration>
             </plugin>
             <plugin>
@@ -471,9 +422,41 @@
                 <version>${maven-checkstyle.version}</version>
                 <configuration>
                     <enableRulesSummary>true</enableRulesSummary>
-                    <suppressionsLocation>checks/checkstyle-suppressions.xml</suppressionsLocation>
-                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+                    <suppressionsLocation>src/checkstyle/suppressions.xml</suppressionsLocation>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-changes-plugin</artifactId>
+                <version>${maven-changes.version}</version>
+                <configuration>
+                    <includeOpenIssues>false</includeOpenIssues>
+                    <onlyMilestoneIssues>false</onlyMilestoneIssues>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>github-report</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven-surefire.version}</version>
             </plugin>
         </plugins>
     </reporting>
@@ -489,10 +472,6 @@
             <name>Nexus Release Repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-        <site>
-            <id>oss-lasmanis-website</id>
-            <url>s3://oss.lasmanis.com/javapatterns</url>
-        </site>
     </distributionManagement>
 
     <repositories>
@@ -524,10 +503,6 @@
                         <groupId>org.kohsuke</groupId>
                         <artifactId>pgp-maven-plugin</artifactId>
                         <version>${pgp-maven.version}</version>
-                        <configuration>
-                            <secretkey>${pgp.secretkey}</secretkey>
-                            <passphrase>${pgp.passphrase}</passphrase>
-                        </configuration>
                         <executions>
                             <execution>
                                 <goals>
