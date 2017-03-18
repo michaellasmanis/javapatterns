@@ -21,7 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Testing {@link Integer} derived class for testing {@link com.lasmanis.javapatterns.Singleton}
  *
- * @author Michael Lasmanis <a href="mailto:michael@lasmanis.com">michael@lasmanis.com</a>
+ * @author mpl
  */
 public class IntegerContainer
     extends Singleton

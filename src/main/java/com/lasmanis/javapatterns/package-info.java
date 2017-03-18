@@ -13,28 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lasmanis.javapatterns.singletonhelpers;
-
-import com.lasmanis.javapatterns.Singleton;
-
 /**
- * Testing {@link String} derived class for testing {@link com.lasmanis.javapatterns.Singleton}
- *
- * @author mpl
+ * Basic java patterns.
  */
-public class StringContainer
-    extends Singleton
-{
-    /**
-     * Local data
-     */
-    public String a;
-
-    /**
-     * Constructor
-     */
-    private StringContainer()
-    {
-         a = "a";
-    }
-}
+package com.lasmanis.javapatterns;

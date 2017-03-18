@@ -81,14 +81,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * </code>
  * </pre>
  *
- * @author Michael Lasmanis <a href="mailto:michael@lasmanis.com">michael@lasmanis.com</a>
+ * @author mpl
  */
-public class Singleton
-{
+public class Singleton {
     /**
-     * Map of the class to local instances data
+     * Map of the class to local instances data.
      */
-    static Map<Class<? extends Singleton>, Singleton> instances =
+    private static final Map<Class<? extends Singleton>, Singleton> INSTANCES =
             new ConcurrentHashMap<Class<? extends Singleton>, Singleton>();
 
     /**
@@ -96,8 +95,7 @@ public class Singleton
      * <p>
      * Scope is protected for instantiation control.
      */
-    protected Singleton()
-    {
+    protected Singleton() {
         super();
     }
 
@@ -137,12 +135,12 @@ public class Singleton
      * @throws java.lang.ExceptionInInitializerError if the initialization
      *          provoked by this method fails.
      * @throws java.lang.SecurityException if the security manager is present
-     *          and prevents access.  See
-     *          {@link java.lang.Class#getDeclaredConstructor(java.lang.Class[])}
+     *          and prevents access.  See {@link
+     *          java.lang.Class#getDeclaredConstructor(java.lang.Class[])}
      * @throws java.lang.NullPointerException if c is null.
      */
     public static <U extends Singleton> U instance(
-            Class<U> c)
+            final Class<U> c)
             throws InstantiationException,
                 IllegalAccessException,
                 NoSuchMethodException,
@@ -150,33 +148,26 @@ public class Singleton
                 InvocationTargetException,
                 ExceptionInInitializerError,
                 SecurityException,
-                NullPointerException
-    {
+                NullPointerException {
         // check
-        if (c == null)
-        {
+        if (c == null) {
             throw new NullPointerException();
         }
 
         // check for an existing instance
         @SuppressWarnings("unchecked")
-        U i = (U) instances.get(c);
-        if (i != null)
-        {
+        U i = (U) INSTANCES.get(c);
+        if (i != null) {
             // an instance already exists, so return it
             return i;
-        }
-        else
-        {
+        } else {
             // need to make a new instance
-            synchronized(Singleton.class)
-            {
+            synchronized (Singleton.class) {
                 // check again in case someone else created it while we were
                 // blocked
                 @SuppressWarnings("unchecked")
-                U j = (U) instances.get(c);
-                if (j != null)
-                {
+                U j = (U) INSTANCES.get(c);
+                if (j != null) {
                     // an instance already exists, so return it
                     return j;
                 }
@@ -188,11 +179,18 @@ public class Singleton
 
                 // create the new instance and save it
                 j = ctor.newInstance(new Object[0]);
-                instances.put(c, j);
+                INSTANCES.put(c, j);
 
                 return j;
             }
-
         }
+    }
+
+    /**
+     * retrieve the instances backing store.
+     * @return the map of instances
+     */
+    public static Map<Class<? extends Singleton>, Singleton> getInstances() {
+        return INSTANCES;
     }
 }
