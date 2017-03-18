@@ -4,12 +4,9 @@ Design Patterns for Java
 Overview
 --------
 
-This library is a set of interfaces and implementations of design patterns for
-java.
+This library is a set of interfaces and implementations of design patterns for Java.
 
-The design of this package is heavily influenced by the book [Design Patterns:
-Elements of Reusable Object-Oriented Software](http://www.hillside.net/elements-of-reusable-object-oriented-software-book "Book Link")
-by Erich Gamma, Richard Heim, Ralph Johnson and John Vlissides.
+The design of this package is heavily influenced by the book [Design Patterns: Elements of Reusable Object-Oriented Software](http://www.hillside.net/elements-of-reusable-object-oriented-software-book "Book Link") by Erich Gamma, Richard Heim, Ralph Johnson and John Vlissides.
 
 Documentation
 -------------
