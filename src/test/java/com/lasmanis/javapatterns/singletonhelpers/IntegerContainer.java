@@ -41,6 +41,11 @@ public class IntegerContainer
 
     /**
      * Instance method wrappers
+     * @return our instance
+     * @throws java.lang.InstantiationException on error
+     * @throws java.lang.IllegalAccessException on error 
+     * @throws java.lang.NoSuchMethodException  on error
+     * @throws java.lang.reflect.InvocationTargetException on error
      */
     public static IntegerContainer instance()
             throws InstantiationException,
