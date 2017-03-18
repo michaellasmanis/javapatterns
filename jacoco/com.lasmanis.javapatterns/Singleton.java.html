@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Singleton.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Design Patterns for Java</a> &gt; <a href="index.source.html" class="el_package">com.lasmanis.javapatterns</a> &gt; <span class="el_source">Singleton.java</span></div><h1>Singleton.java</h1><pre class="source lang-java linenums">/**
+ * Copyright © 2013 Michael Lasmanis (michael@lasmanis.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.lasmanis.javapatterns;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * Basic singleton implementation.
+ * &lt;p&gt;
+ * This class provide the implementation of a thread-safe, generic singleton
+ * pattern.
+ * {@link com.lasmanis.javapatterns.Singleton#instance(java.lang.Class)} is a
+ * thread-safe operation for both retreval and creation.
+ * Derived classes are responsible
+ * for initializing themselves in a thread-safe manner.  If initialization is
+ * required, the code involved is contained in a &lt;code&gt;synchronized&lt;/code&gt;
+ * block tied to the {@link com.lasmanis.javapatterns.Singleton} class.
+ * &lt;p&gt;
+ * Deriving classes should declare a non-public default constructor.  This
+ * class assumes the existing of a default constructor (ie, takes no
+ * parameters) and uses reflection to locate the constructor if an instance
+ * of a particular derived class has not yet been instantiated.  For safety
+ * reasons, derived classes should not declare any public constructors.
+ * &lt;p&gt;
+ * This class provides no facilities for calling a non-default constructor
+ * and initialization of the created instance is left to the derived class.
+ * &lt;p&gt;
+ * The expect form of a derived class looks is as follows:
+ * &lt;pre&gt;
+ * &lt;code&gt;
+ *public class IntegerContainer
+ *    extends Singleton
+ *{
+ *    // instance local data
+ *    public int a;
+ *
+ *    // private constructor for initialization
+ *    private IntegerContainer()
+ *    {
+ *        a = 1;
+ *    }
+ *
+ *    // convenience method
+ *    public static IntegerContainer instance()
+ *          throws InstantiationException,
+ *              IllegalAccessException,
+ *              NoSuchMethodException,
+ *              IllegalArgumentException,
+ *              InvocationTargetException,
+ *              ExceptionInInitializerError,
+ *              SecurityException
+ *    {
+ *        return IntegerContainer.instance(IntegerContainer.class);
+ *    }
+ *}
+ * &lt;/code&gt;
+ * &lt;/pre&gt;
+ * The addition of the simplified &lt;code&gt;instance()&lt;/code&gt; is purely for the
+ * convenience of the programmer.  It simplifes the invocation and reduces
+ * accidental type mis-matches.  With this additional method, getting an
+ * instance is as simple as :
+ * &lt;pre&gt;
+ * &lt;code&gt;
+ * IntegerContainer i = IntegerContainer.instance();
+ * &lt;/code&gt;
+ * &lt;/pre&gt;
+ *
+ * @author mpl
+ */
+public class Singleton {
+    /**
+     * Map of the class to local instances data.
+     */
+<span class="fc" id="L90">    private static final Map&lt;Class&lt;? extends Singleton&gt;, Singleton&gt; INSTANCES =</span>
+            new ConcurrentHashMap&lt;Class&lt;? extends Singleton&gt;, Singleton&gt;();
+
+    /**
+     * Constructor.
+     * &lt;p&gt;
+     * Scope is protected for instantiation control.
+     */
+    protected Singleton() {
+<span class="fc" id="L99">        super();</span>
+<span class="fc" id="L100">    }</span>
+
+    /**
+     * Access the instance backing the singleton
+     * &lt;p&gt;
+     * This method returns an existing derived
+     * {@link com.lasmanis.javapatterns.Singleton} instance or
+     * allocates a new instance.  This method uses reflection, specifically
+     * {@link java.lang.reflect.Constructor#newInstance(java.lang.Object[])} and
+     * {@link java.lang.Class#getDeclaredConstructor(java.lang.Class[])} to
+     * accomplish this.  The method also assumes the existence of the default
+     * constructor taking zero parameters and will throw
+     * {@link java.lang.NoSuchMethodException} if
+     * the default constructor is not found.
+     * &lt;p&gt;
+     * This is a thread-safe operation.
+     *
+     * @param &lt;U&gt; the type parameter of the derived object object.
+     * @param c the {@link java.lang.Class} object corresponding to U.
+     * @return the derived {@link com.lasmanis.javapatterns.Singleton} object.
+     * @throws java.lang.InstantiationException if the class that declares the
+     *          underlying constructor represents an abstract class.
+     * @throws java.lang.IllegalAccessException if this Constructor object
+     *          enforces Java language access control and the underlying
+     *          constructor is inaccessible.
+     * @throws java.lang.NoSuchMethodException if the default constructor is not
+     *          found.
+     * @throws java.lang.IllegalArgumentException  if the number of actual and
+     *          formal parameters differ; if an unwrapping conversion for
+     *          primitive arguments fails; or if, after possible unwrapping, a
+     *          parameter value cannot be converted to the corresponding formal
+     *          parameter type by a method invocation conversion; if this
+     *          constructor pertains to an enum type.
+     * @throws java.lang.reflect.InvocationTargetException if the underlying
+     *          constructor throws an exception.
+     * @throws java.lang.ExceptionInInitializerError if the initialization
+     *          provoked by this method fails.
+     * @throws java.lang.SecurityException if the security manager is present
+     *          and prevents access.  See {@link
+     *          java.lang.Class#getDeclaredConstructor(java.lang.Class[])}
+     * @throws java.lang.NullPointerException if c is null.
+     */
+    public static &lt;U extends Singleton&gt; U instance(
+            final Class&lt;U&gt; c)
+            throws InstantiationException,
+                IllegalAccessException,
+                NoSuchMethodException,
+                IllegalArgumentException,
+                InvocationTargetException,
+                ExceptionInInitializerError,
+                SecurityException,
+                NullPointerException {
+        // check
+<span class="fc bfc" id="L153" title="All 2 branches covered.">        if (c == null) {</span>
+<span class="fc" id="L154">            throw new NullPointerException();</span>
+        }
+
+        // check for an existing instance
+        @SuppressWarnings(&quot;unchecked&quot;)
+<span class="fc" id="L159">        U i = (U) INSTANCES.get(c);</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">        if (i != null) {</span>
+            // an instance already exists, so return it
+<span class="fc" id="L162">            return i;</span>
+        } else {
+            // need to make a new instance
+<span class="fc" id="L165">            synchronized (Singleton.class) {</span>
+                // check again in case someone else created it while we were
+                // blocked
+                @SuppressWarnings(&quot;unchecked&quot;)
+<span class="fc" id="L169">                U j = (U) INSTANCES.get(c);</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">                if (j != null) {</span>
+                    // an instance already exists, so return it
+<span class="nc" id="L172">                    return j;</span>
+                }
+
+                // get the default constructor and make it accessible to us
+<span class="fc" id="L176">                Class&lt;?&gt;[] typeList = new Class&lt;?&gt;[0];</span>
+<span class="fc" id="L177">                Constructor&lt;U&gt; ctor = c.getDeclaredConstructor(typeList);</span>
+<span class="fc" id="L178">                ctor.setAccessible(true);</span>
+
+                // create the new instance and save it
+<span class="fc" id="L181">                j = ctor.newInstance(new Object[0]);</span>
+<span class="fc" id="L182">                INSTANCES.put(c, j);</span>
+
+<span class="fc" id="L184">                return j;</span>
+<span class="fc" id="L185">            }</span>
+        }
+    }
+
+    /**
+     * retrieve the instances backing store.
+     * @return the map of instances
+     */
+    public static Map&lt;Class&lt;? extends Singleton&gt;, Singleton&gt; getInstances() {
+<span class="fc" id="L194">        return INSTANCES;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
