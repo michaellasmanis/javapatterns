@@ -21,7 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Testing {@link Integer} derived class for testing {@link com.lasmanis.javapatterns.Singleton}
  *
- * @author Michael Lasmanis <a href="mailto:michael@lasmanis.com">michael@lasmanis.com</a>
+ * @author mpl
  */
 public class IntegerContainer
     extends Singleton
@@ -41,6 +41,11 @@ public class IntegerContainer
 
     /**
      * Instance method wrappers
+     * @return our instance
+     * @throws java.lang.InstantiationException on error
+     * @throws java.lang.IllegalAccessException on error 
+     * @throws java.lang.NoSuchMethodException  on error
+     * @throws java.lang.reflect.InvocationTargetException on error
      */
     public static IntegerContainer instance()
             throws InstantiationException,

@@ -30,7 +30,7 @@ import org.junit.Test;
 /**
  * Test cases for the {@link com.lasmanis.javapatterns.Singleton} class.
  *
- * @author Michael Lasmanis <a href="mailto:michael@lasmanis.com">michael@lasmanis.com</a>
+ * @author mpl
  */
 public class SingletonTest
 {
@@ -64,7 +64,7 @@ public class SingletonTest
     public void setUp()
     {
         // reset the map
-        Singleton.instances.clear();
+        Singleton.getInstances().clear();
     }
 
     /**
@@ -102,14 +102,14 @@ public class SingletonTest
         assertFalse(testString1.equals(testString2));
 
         // start as null
-        assertTrue(Singleton.instances.isEmpty());
+        assertTrue(Singleton.getInstances().isEmpty());
 
         // get a copy and check
         IntegerContainer i = IntegerContainer.instance(IntegerContainer.class);
-        assertTrue(Singleton.instances.size() == 1);
+        assertTrue(Singleton.getInstances().size() == 1);
         assertTrue(i != null);
-        assertTrue(i == Singleton.instances.get(IntegerContainer.class));
-        assertTrue(i.equals(Singleton.instances.get(IntegerContainer.class)));
+        assertTrue(i == Singleton.getInstances().get(IntegerContainer.class));
+        assertTrue(i.equals(Singleton.getInstances().get(IntegerContainer.class)));
 
         // access the data
         assertTrue(i.a == 1);
@@ -119,10 +119,10 @@ public class SingletonTest
 
         // get a copy and check (use the convenience method as a check
         IntegerContainer j = IntegerContainer.instance();
-        assertTrue(Singleton.instances.size() == 1);
+        assertTrue(Singleton.getInstances().size() == 1);
         assertTrue(j != null);
-        assertTrue(j == Singleton.instances.get(IntegerContainer.class));
-        assertTrue(j.equals(Singleton.instances.get(IntegerContainer.class)));
+        assertTrue(j == Singleton.getInstances().get(IntegerContainer.class));
+        assertTrue(j.equals(Singleton.getInstances().get(IntegerContainer.class)));
 
         // ensure i and j are the same
         assertTrue(i == j);
@@ -136,10 +136,10 @@ public class SingletonTest
 
         // get a copy and check
         StringContainer k = StringContainer.instance(StringContainer.class);
-        assertTrue(Singleton.instances.size() == 2);
+        assertTrue(Singleton.getInstances().size() == 2);
         assertTrue(k != null);
-        assertTrue(k == Singleton.instances.get(StringContainer.class));
-        assertTrue(k.equals(Singleton.instances.get(StringContainer.class)));
+        assertTrue(k == Singleton.getInstances().get(StringContainer.class));
+        assertTrue(k.equals(Singleton.getInstances().get(StringContainer.class)));
 
         // access the data
         assertTrue(k.a.equals("a"));
@@ -149,10 +149,10 @@ public class SingletonTest
 
         // get a copy and check
         StringContainer l = StringContainer.instance(StringContainer.class);
-        assertTrue(Singleton.instances.size() == 2);
+        assertTrue(Singleton.getInstances().size() == 2);
         assertTrue(l != null);
-        assertTrue(l == Singleton.instances.get(StringContainer.class));
-        assertTrue(l.equals(Singleton.instances.get(StringContainer.class)));
+        assertTrue(l == Singleton.getInstances().get(StringContainer.class));
+        assertTrue(l.equals(Singleton.getInstances().get(StringContainer.class)));
 
         // ensure k and l are the same
         assertTrue(k == l);
@@ -172,7 +172,7 @@ public class SingletonTest
         j = null;
         k = null;
         l = null;
-        assertTrue(Singleton.instances.size() == 2);
+        assertTrue(Singleton.getInstances().size() == 2);
     }
 
     /**
