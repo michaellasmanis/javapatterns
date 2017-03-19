@@ -103,6 +103,7 @@
         <maven-site.version>3.5.1</maven-site.version>
         <maven-source.version>3.0.1</maven-source.version>
         <maven-surefire.version>2.19.1</maven-surefire.version>
+        <mpl-checkstyle.version>0.0.1</mpl-checkstyle.version>
         <nexus-staging-maven.version>1.6.8</nexus-staging-maven.version>
         <pgp-maven.version>1.1</pgp-maven.version>
         <versions-maven.version>2.3</versions-maven.version>
@@ -391,7 +392,7 @@
                     <dependency>
                         <groupId>com.lasmanis</groupId>
                         <artifactId>checkstyle-config</artifactId>
-                        <version>0.0.1</version>
+                        <version>${mpl-checkstyle.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
