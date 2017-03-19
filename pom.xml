@@ -108,7 +108,7 @@
         <versions-maven.version>2.3</versions-maven.version>
         
         <!-- checkstyle configuration -->
-        <checkstyle.config.location>src/checkstyle/sun_checks.xml</checkstyle.config.location>
+        <checkstyle.config.location>checkstyle/mpl_checks.xml</checkstyle.config.location>
     </properties>
 
     <url>https://${repository.domain}/${repository.user}/${repository.name}</url>
@@ -301,7 +301,6 @@
                     <excludes>
                         <exclude>LICENSE</exclude>
                         <exclude>README.markdown</exclude>
-                        <exclude>src/checkstyle/sun_checks.xml</exclude>
                         <exclude>src/site/markdown/*</exclude>
                     </excludes>
                     <mapping>
@@ -383,6 +382,18 @@
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.lasmanis</groupId>
+                        <artifactId>checkstyle-config</artifactId>
+                        <version>0.0.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
