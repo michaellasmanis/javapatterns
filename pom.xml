@@ -85,7 +85,7 @@
         <doxia-module-markdown.version>1.7</doxia-module-markdown.version>
         <exec-maven.version>1.5.0</exec-maven.version>
         <jacoco-maven.version>0.7.7.201606060606</jacoco-maven.version>
-        <jgitflow-maven.version>1.0-m5.1</jgitflow-maven.version>
+        <jgitflow-maven.version>1.0.0-rc-1</jgitflow-maven.version>
         <license-maven.version>3.0</license-maven.version>
         <maven-changes.version>2.12.1</maven-changes.version>
         <maven-checkstyle.version>2.17</maven-checkstyle.version>
@@ -107,7 +107,7 @@
         <nexus-staging-maven.version>1.6.8</nexus-staging-maven.version>
         <pgp-maven.version>1.1</pgp-maven.version>
         <versions-maven.version>2.3</versions-maven.version>
-        
+
         <!-- checkstyle configuration -->
         <checkstyle.config.location>checkstyle/mpl_checks.xml</checkstyle.config.location>
     </properties>
@@ -166,7 +166,7 @@
 
         <plugins>
             <plugin>
-                <groupId>external.atlassian.jgitflow</groupId>
+                <groupId>io.ultreia.java4all.jgitflow</groupId>
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>${jgitflow-maven.version}</version>
                 <configuration>
