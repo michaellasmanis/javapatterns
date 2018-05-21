@@ -56,7 +56,7 @@ jobs:
       # run tests!
       - run: mvn clean verify
 
-test:
+  test:
     post:
         - test -e target/site/jacoco/jacoco.xml || echo "Code coverage failed"
         - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
