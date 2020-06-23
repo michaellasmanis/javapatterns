@@ -1,5 +1,5 @@
 #
-# Copyright © 2013 Michael Lasmanis (michael@lasmanis.com)
+# Copyright © 2020 Michael Lasmanis (michael@lasmanis.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,26 +36,104 @@ jobs:
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
+      # start with a safe build number
+      MVN_CHANGELIST: 0-SNAPSHOT
+
     steps:
       - checkout
+
+      - run:
+          name: "Setup version information"
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]
+            then
+            echo "export MVN_CHANGELIST=${CIRCLE_BUILD_NUM}" >> $BASH_ENV
+            else
+            echo "export MVN_CHANGELIST=${CIRCLE_BUILD_NUM}-SNAPSHOT"  >> $BASH_ENV
+            fi
+            source $BASH_ENV
+            echo "MVN_CHANGELIST = ${MVN_CHANGELIST}"
+
+      - run:
+          name: "Setup GPG"
+          command: |
+            mkdir ~/.gnupg
+            chmod 700 ~/.gnupg
+            echo "default-cache-ttl 46000" >> ~/.gnupg/gpg-agent.conf
+            echo "pinentry-program /usr/bin/pinentry" >> ~/.gnupg/gpg-agent.conf
+            echo "allow-preset-passphrase" >> ~/.gnupg/gpg-agent.conf
+            echo "${GPG_SECRETKEYBASE64}" | base64 --decode | gpg --yes --batch --import
+            /usr/lib/gnupg/gpg-preset-passphrase --preset --passphrase "${GPG_PASSPHRASE}" "${GPG_KEYGRIP}"
+
+
+      - run:
+          name: Setting up git
+          command: |
+            git config --global user.email "${GPG_EMAIL}"
+            git config --global user.name "${GPG_NAME}"
+            git config --global user.signingkey "${GPG_KEYID}"
+            git config --global commit.gpgsign 'true'
+            git config --global tag.forceSignAnnotated 'true'
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+          - v2-maven-repo-{{ .Branch }}-{{ checksum "pom.xml" }}
+          - v2-maven-repo-{{ .Branch }}
+          - v2-maven-repo-
 
-      - run: mvn dependency:go-offline
+      - run:
+          name: Fetching maven dependencies
+          command: |
+            mvn -s .circleci/maven.settings.xml -Dgpg.keyname=${GPG_EMAIL} -Dchangelist=${MVN_CHANGELIST} -DenableSigning=true dependency:go-offline
+
+      - run:
+          name: Maven Build & Deploy
+          command: |
+            mvn -s .circleci/maven.settings.xml -Dgpg.keyname=${GPG_EMAIL} -Dchangelist=${MVN_CHANGELIST} -DenableSigning=true clean deploy scm:tag
+
+      - run:
+          name: Maven Site Stage
+          command: |
+            mvn -s .circleci/maven.settings.xml -Dgpg.keyname=${GPG_EMAIL} -Dchangelist=${MVN_CHANGELIST} -DenableSigning=true site site:stage
+
+      - run:
+          name: Maven Site Publish
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]
+            then
+            mvn -s .circleci/maven.settings.xml -Dgpg.keyname=${GPG_EMAIL} -Dchangelist=${MVN_CHANGELIST} -DenableSigning=true scm-publish:publish-scm
+            fi
 
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+          key: v2-maven-repo-{{ .Branch }}-{{ checksum "pom.xml" }}
 
-      # run tests!
-      - run: mvn clean verify
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/junit/ \;
+          when: always
+
+      - store_test_results:
+          path: ~/junit
+
+      - store_artifacts:
+          path: ~/junit
 
       # codecov.io
       - run: test -e target/site/jacoco/jacoco.xml || echo "Code coverage failed"
       - run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+workflows:
+  version: 2
+  build-workflow:
+    jobs:
+      - build:
+          context: lasmanis-context
+          filters:
+            branches:
+              ignore:
+                - gh-pages

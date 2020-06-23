@@ -21,7 +21,7 @@
 
     <groupId>com.lasmanis</groupId>
     <artifactId>javapatterns</artifactId>
-    <version>1.1.19</version>
+    <version>${revision}.${changelist}</version>
 
     <packaging>jar</packaging>
 
@@ -37,95 +37,32 @@
         </license>
     </licenses>
 
-    <organization>
-        <name>Michael Lasmanis</name>
-        <url>https://github.com/michaellasmanis/</url>
-    </organization>
-
-    <developers>
-        <developer>
-            <id>mpl</id>
-            <name>Michael Lasmanis</name>
-            <organization>Michael Lasmanis</organization>
-            <organizationUrl>https://github.com/michaellasmanis/</organizationUrl>
-            <email>michael@lasmanis.com</email>
-            <url>http://lasmanis.com/</url>
-        </developer>
-    </developers>
-
-    <prerequisites>
-        <maven>${maven.version}</maven>
-    </prerequisites>
-
     <properties>
-        <maven.version>3.0.4</maven.version>
-
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <target-java.version>1.8</target-java.version>
-
-        <!-- scm & site publish -->
-        <repository.domain>github.com</repository.domain>
-        <repository.user>michaellasmanis</repository.user>
+        <revision>1.2</revision>
+        <changelist>0-SNAPSHOT</changelist>
         <repository.name>javapatterns</repository.name>
-        <scmPublish.checkoutDirectory>${project.build.directory}/scmpublish</scmPublish.checkoutDirectory>
-        <scm-publish.scmBranch>gh-pages</scm-publish.scmBranch>
-        <scm-publish.pubScmUrl>scm:git:git@${repository.domain}:${repository.user}/${repository.name}.git</scm-publish.pubScmUrl>
-        <scm-publish.siteDocOuputDirectory>${project.reporting.outputDirectory}</scm-publish.siteDocOuputDirectory>
-
-        <!-- copyright -->
-        <copyright.owner>Michael Lasmanis</copyright.owner>
-        <copyright.email>michael@lasmanis.com</copyright.email>
+        <tiles-maven.version>2.17</tiles-maven.version>
+        <maven-tiles-core.version>0.0.37</maven-tiles-core.version>
 
         <!-- dependencies -->
         <junit.version>4.12</junit.version>
-
-        <!-- plugins/extensions -->
-        <clirr-maven.version>2.8</clirr-maven.version>
-        <doxia-module-markdown.version>1.7</doxia-module-markdown.version>
-        <exec-maven.version>1.5.0</exec-maven.version>
-        <jacoco-maven.version>0.7.7.201606060606</jacoco-maven.version>
-        <jgitflow-maven.version>1.0.0-rc-1</jgitflow-maven.version>
-        <license-maven.version>3.0</license-maven.version>
-        <maven-changes.version>2.12.1</maven-changes.version>
-        <maven-checkstyle.version>2.17</maven-checkstyle.version>
-        <maven-clean.version>3.0.0</maven-clean.version>
-        <maven-compiler.version>3.5.1</maven-compiler.version>
-        <maven-deploy.version>2.8.2</maven-deploy.version>
-        <maven-install.version>2.5.2</maven-install.version>
-        <maven-jar.version>3.0.2</maven-jar.version>
-        <maven-javadoc.version>2.10.4</maven-javadoc.version>
-        <maven-jxr.version>2.5</maven-jxr.version>
-        <maven-pmd.version>3.6</maven-pmd.version>
-        <maven-project-info-reports.version>2.9</maven-project-info-reports.version>
-        <maven-resources.version>3.0.1</maven-resources.version>
-        <maven-scm-publish.version>1.1</maven-scm-publish.version>
-        <maven-site.version>3.5.1</maven-site.version>
-        <maven-source.version>3.0.1</maven-source.version>
-        <maven-surefire.version>2.19.1</maven-surefire.version>
-        <mpl-checkstyle.version>0.0.1</mpl-checkstyle.version>
-        <nexus-staging-maven.version>1.6.8</nexus-staging-maven.version>
-        <pgp-maven.version>1.1</pgp-maven.version>
-        <versions-maven.version>2.3</versions-maven.version>
-
-        <!-- checkstyle configuration -->
-        <checkstyle.config.location>checkstyle/mpl_checks.xml</checkstyle.config.location>
     </properties>
 
-    <url>https://${repository.domain}/${repository.user}/${repository.name}</url>
+    <url>${baseurl}</url>
 
     <scm>
-        <connection>scm:git:ssh://${repository.domain}/${repository.user}/${repository.name}.git</connection>
-        <url>https://${repository.domain}/${repository.user}/${repository.name}</url>
-        <developerConnection>scm:git:ssh://${repository.domain}/${repository.user}/${repository.name}.git</developerConnection>
-        <tag>HEAD</tag>
+        <connection>${scmBase.connection}</connection>
+        <url>${scmBase.url}</url>
+        <developerConnection>${scmBase.developerConnection}</developerConnection>
+        <tag>${scmBase.tag}</tag>
     </scm>
 
-    <issueManagement>
-        <url>https://${repository.domain}/${repository.user}/${repository.name}/issues</url>
-        <system>GitHub</system>
-    </issueManagement>
-
+    <distributionManagement>
+        <site>
+            <id>scm-publish</id>
+            <url>${scmBase.connection}</url>
+        </site>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -137,387 +74,19 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>${maven-site.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.maven.doxia</groupId>
-                            <artifactId>doxia-module-markdown</artifactId>
-                            <version>${doxia-module-markdown.version}</version>
-                        </dependency>
-                    </dependencies>
-                    <configuration>
-                        <skipDeploy>true</skipDeploy>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-
         <plugins>
             <plugin>
-                <groupId>io.ultreia.java4all.jgitflow</groupId>
-                <artifactId>jgitflow-maven-plugin</artifactId>
-                <version>${jgitflow-maven.version}</version>
-                <configuration>
-                    <enableSshAgent>true</enableSshAgent>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <pushFeatures>true</pushFeatures>
-                    <pushReleases>true</pushReleases>
-                    <pushHotfixes>true</pushHotfixes>
-                    <goals>clean,deploy,site-deploy</goals>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>${maven-clean.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler.version}</version>
-                <configuration>
-                    <source>${target-java.version}</source>
-                    <target>${target-java.version}</target>
-                    <compilerArgs>
-                        <arg>-Xlint:all</arg>
-                    </compilerArgs>
-                    <showWarnings>true</showWarnings>
-                    <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven-deploy.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>${maven-install.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar.version}</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc.version}</version>
-                <configuration>
-                    <show>protected</show>
-                    <nohelp>true</nohelp>
-                    <fixTags>author,since,param,return,throws,link</fixTags>
-                    <doctitle>${project.name} ${project.version}</doctitle>
-                    <windowtitle>${project.name} ${project.version}</windowtitle>
-                    <testDoctitle>${project.name} ${project.version} Tests</testDoctitle>
-                    <testWindowtitle>${project.name} ${project.version} Tests</testWindowtitle>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${maven-project-info-reports.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>${maven-site.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.doxia</groupId>
-                        <artifactId>doxia-module-markdown</artifactId>
-                        <version>${doxia-module-markdown.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>${maven-source.version}</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>clirr-maven-plugin</artifactId>
-                <version>${clirr-maven.version}</version>
-                <configuration>
-                    <failOnWarning>true</failOnWarning>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${license-maven.version}</version>
-                <configuration>
-                    <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-                    <properties>
-                        <owner>${copyright.owner}</owner>
-                        <email>${copyright.email}</email>
-                    </properties>
-                    <excludes>
-                        <exclude>LICENSE</exclude>
-                        <exclude>README.markdown</exclude>
-                        <exclude>src/site/markdown/*</exclude>
-                    </excludes>
-                    <mapping>
-                        <markdown>DOUBLESLASH_STYLE</markdown>
-                        <NOTICE>TEXT</NOTICE>
-                    </mapping>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco-maven.version}</version>
-                <executions>
-                    <execution>
-                        <id>pre-unit-test</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>post-unit-test</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec-maven.version}</version>
-                <configuration>
-                    <mainClass>${project.mainClass}</mainClass>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>versions-maven-plugin</artifactId>
-                <version>${versions-maven.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-publish-plugin</artifactId>
-                <version>${maven-scm-publish.version}</version>
-                <configuration>
-                    <checkoutDirectory>${scmPublish.checkoutDirectory}</checkoutDirectory>
-                    <checkinComment>Publishing Site Docs for ${project.artifactId}:${project.version}
-                    </checkinComment>
-                    <content>${scm-publish.siteDocOuputDirectory}</content>
-                    <skipDeletedFiles>true</skipDeletedFiles>
-                    <pubScmUrl>${scm-publish.pubScmUrl}</pubScmUrl>
-                    <scmBranch>${scm-publish.scmBranch}</scmBranch>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>scm-publish</id>
-                        <phase>site-deploy</phase>
-                        <goals>
-                            <goal>publish-scm</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>${nexus-staging-maven.version}</version>
+                <groupId>io.repaint.maven</groupId>
+                <artifactId>tiles-maven-plugin</artifactId>
+                <version>${tiles-maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <tiles>
+                        <tile>com.lasmanis.maven.tiles:core-set-ossrh:${maven-tiles-core.version}</tile>
+                        <tile>com.lasmanis.maven.tiles:java-setq:${maven-tiles-core.version}</tile>
+                    </tiles>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.lasmanis</groupId>
-                        <artifactId>checkstyle-config</artifactId>
-                        <version>${mpl-checkstyle.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>${maven-project-info-reports.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>${maven-javadoc.version}</version>
-                <configuration>
-                    <show>protected</show>
-                    <nohelp>true</nohelp>
-                    <doctitle>${project.name} ${project.version}</doctitle>
-                    <windowtitle>${project.name} ${project.version}</windowtitle>
-                    <testDoctitle>${project.name} ${project.version} Tests</testDoctitle>
-                    <testWindowtitle>${project.name} ${project.version} Tests</testWindowtitle>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>clirr-maven-plugin</artifactId>
-                <version>${clirr-maven.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jxr-plugin</artifactId>
-                <version>${maven-jxr.version}</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>${maven-pmd.version}</version>
-                <configuration>
-                    <linkXref>true</linkXref>
-                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
-                    <targetJdk>${target-java.version}</targetJdk>
-                    <skipEmptyReport>false</skipEmptyReport>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle.version}</version>
-                <configuration>
-                    <enableRulesSummary>true</enableRulesSummary>
-                    <suppressionsLocation>src/checkstyle/suppressions.xml</suppressionsLocation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco-maven.version}</version>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-changes-plugin</artifactId>
-                <version>${maven-changes.version}</version>
-                <configuration>
-                    <includeOpenIssues>false</includeOpenIssues>
-                    <onlyMilestoneIssues>false</onlyMilestoneIssues>
-                </configuration>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <report>github-report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>${maven-surefire.version}</version>
-            </plugin>
-        </plugins>
-    </reporting>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-
-    <profiles>
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.kohsuke</groupId>
-                        <artifactId>pgp-maven-plugin</artifactId>
-                        <version>${pgp-maven.version}</version>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 </project>
