@@ -1,4 +1,8 @@
-\.DS_Store
-\._*
-\.vagrant/
-target/
+/target/
+*/target/
+dependency-reduced-pom.xml
+.flattened-pom.xml
+.vagrant/
+.DS_Store
+.idea
+*.iml
