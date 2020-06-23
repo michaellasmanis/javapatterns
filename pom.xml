@@ -83,7 +83,7 @@
                 <configuration>
                     <tiles>
                         <tile>com.lasmanis.maven.tiles:core-set-ossrh:${maven-tiles-core.version}</tile>
-                        <tile>com.lasmanis.maven.tiles:java-setq:${maven-tiles-core.version}</tile>
+                        <tile>com.lasmanis.maven.tiles:java-set:${maven-tiles-core.version}</tile>
                     </tiles>
                 </configuration>
             </plugin>
