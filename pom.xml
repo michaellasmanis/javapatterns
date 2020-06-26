@@ -42,7 +42,7 @@
         <changelist>0-SNAPSHOT</changelist>
         <repository.name>javapatterns</repository.name>
         <tiles-maven.version>2.17</tiles-maven.version>
-        <maven-tiles-core.version>0.0.42</maven-tiles-core.version>
+        <maven-tiles-core.version>0.0.45</maven-tiles-core.version>
 
         <!-- dependencies -->
         <junit.version>4.12</junit.version>
