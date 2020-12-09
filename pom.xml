@@ -42,10 +42,10 @@
         <changelist>0-SNAPSHOT</changelist>
         <repository.name>javapatterns</repository.name>
         <tiles-maven.version>2.17</tiles-maven.version>
-        <maven-tiles-core.version>0.0.48</maven-tiles-core.version>
+        <lasmanis-maven-tiles.version>0.0.51</lasmanis-maven-tiles.version>
 
         <!-- dependencies -->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
 
     <url>${baseurl}</url>
@@ -82,8 +82,8 @@
                 <extensions>true</extensions>
                 <configuration>
                     <tiles>
-                        <tile>com.lasmanis.maven.tiles:core-set-ossrh:${maven-tiles-core.version}</tile>
-                        <tile>com.lasmanis.maven.tiles:java-set:${maven-tiles-core.version}</tile>
+                        <tile>com.lasmanis.maven.tiles:core-set-ossrh:${lasmanis-maven-tiles.version}</tile>
+                        <tile>com.lasmanis.maven.tiles:java-set:${lasmanis-maven-tiles.version}</tile>
                     </tiles>
                 </configuration>
             </plugin>
