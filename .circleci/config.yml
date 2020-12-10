@@ -18,7 +18,11 @@
 #
 # Check https://circleci.com/docs/2.0/language-java/ for more details
 #
-version: 2
+version: 2.1
+
+orbs:
+  slack: circleci/slack@4.1.3
+
 jobs:
   build:
     docker:
@@ -127,8 +131,15 @@ jobs:
       - run: test -e target/site/jacoco/jacoco.xml || echo "Code coverage failed"
       - run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
+
 workflows:
-  version: 2
   build-workflow:
     jobs:
       - build:
