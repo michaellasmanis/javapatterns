@@ -34,10 +34,8 @@
         <changelist>0-SNAPSHOT</changelist>
         <repository.name>javapatterns</repository.name>
         <tiles-maven.version>2.19</tiles-maven.version>
-        <lasmanis-maven-tiles.version>0.0.61</lasmanis-maven-tiles.version>
-
-        <!-- dependencies -->
-        <junit.version>4.13.1</junit.version>
+        <lasmanis-maven-composites.version>0.0.16</lasmanis-maven-composites.version>
+        <lasmanis-maven-tiles.version>0.0.70</lasmanis-maven-tiles.version>
     </properties>
 
     <url>${baseurl}</url>
@@ -58,9 +56,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>com.lasmanis.maven.composites</groupId>
+            <artifactId>unit-test</artifactId>
+            <version>${lasmanis-maven-composites.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
