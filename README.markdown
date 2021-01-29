@@ -4,7 +4,6 @@ Design Patterns for Java
 | Branch | Status |
 | ------ | ------ |
 |Master|[![Build Status](https://img.shields.io/circleci/project/github/michaellasmanis/javapatterns/master.svg)](https://circleci.com/gh/michaellasmanis/javapatterns/tree/master) [![Codecov](https://img.shields.io/codecov/c/github/michaellasmanis/javapatterns/master.svg)](https://codecov.io/gh/michaellasmanis/javapatterns/branch/master) [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.lasmanis/javapatterns/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.lasmanis/javapatterns)|
-|Develop|[![Build Status](https://img.shields.io/circleci/project/github/michaellasmanis/javapatterns/develop.svg)](https://circleci.com/gh/michaellasmanis/javapatterns/tree/develop) [![Codecov](https://img.shields.io/codecov/c/github/michaellasmanis/javapatterns/develop.svg)](https://codecov.io/gh/michaellasmanis/javapatterns/branch/develop)|
 
 Overview
 --------
@@ -35,5 +34,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-
