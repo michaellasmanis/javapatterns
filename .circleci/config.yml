@@ -15,8 +15,15 @@
 #
 
 # Simple config file to ignore gh-pages branch
-
 version: 2.1
+
+jobs:
+  build:
+#    docker:
+#      - image: circleci/openjdk:8-jdk
+#    steps:
+#      - checkout
+
 workflows:
   build-workflow:
     jobs:
