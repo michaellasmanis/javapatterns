@@ -1,5 +1,5 @@
 #
-# Copyright © 2020 Michael Lasmanis (michael@lasmanis.com)
+# Copyright © 2013 Michael Lasmanis (michael@lasmanis.com)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,21 +14,13 @@
 # limitations under the License.
 #
 
-# Simple config file to ignore gh-pages branch
-version: 2.1
-
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/openjdk:8-jdk
-    steps:
-      - checkout
-
-workflows:
-  build-workflow:
-    jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - gh-pages
+    branches:
+      ignore:
+        - gh-pages
