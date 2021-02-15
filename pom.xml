@@ -34,8 +34,8 @@
         <changelist>0-SNAPSHOT</changelist>
         <repository.name>javapatterns</repository.name>
         <tiles-maven.version>2.19</tiles-maven.version>
-        <lasmanis-maven-composites.version>0.0.38</lasmanis-maven-composites.version>
-        <lasmanis-maven-tiles.version>0.0.79</lasmanis-maven-tiles.version>
+        <lasmanis-maven-composites.version>0.0.43</lasmanis-maven-composites.version>
+        <lasmanis-maven-tiles.version>0.0.102</lasmanis-maven-tiles.version>
     </properties>
 
     <url>${baseurl}</url>
@@ -58,16 +58,19 @@
       <dependency>
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
+          <scope>test</scope>
       </dependency>
 
       <dependency>
           <groupId>org.assertj</groupId>
           <artifactId>assertj-core</artifactId>
+          <scope>test</scope>
       </dependency>
 
       <dependency>
           <groupId>org.mockito</groupId>
           <artifactId>mockito-core</artifactId>
+          <scope>test</scope>
       </dependency>
     </dependencies>
 
