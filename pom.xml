@@ -33,9 +33,9 @@
         <revision>1.2</revision>
         <changelist>0-SNAPSHOT</changelist>
         <repository.name>javapatterns</repository.name>
-        <tiles-maven.version>2.19</tiles-maven.version>
-        <lasmanis-maven-composites.version>0.0.43</lasmanis-maven-composites.version>
-        <lasmanis-maven-tiles.version>0.0.102</lasmanis-maven-tiles.version>
+        <tiles-maven.version>2.23</tiles-maven.version>
+        <lasmanis-maven-composites.version>0.0.47</lasmanis-maven-composites.version>
+        <lasmanis-maven-tiles.version>0.0.109</lasmanis-maven-tiles.version>
     </properties>
 
     <url>${baseurl}</url>
