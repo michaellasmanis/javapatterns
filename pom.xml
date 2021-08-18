@@ -35,7 +35,7 @@
         <repository.name>javapatterns</repository.name>
         <tiles-maven.version>2.23</tiles-maven.version>
         <lasmanis-maven-composites.version>0.0.47</lasmanis-maven-composites.version>
-        <lasmanis-maven-tiles.version>0.0.109</lasmanis-maven-tiles.version>
+        <lasmanis-maven-tiles.version>0.0.112</lasmanis-maven-tiles.version>
     </properties>
 
     <url>${baseurl}</url>
