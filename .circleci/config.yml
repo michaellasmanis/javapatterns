@@ -22,6 +22,7 @@ version: 2.1
 
 orbs:
   slack: circleci/slack@4.1.3
+  codecov: codecov/codecov@3.1.1
 
 jobs:
   build:
@@ -129,7 +130,7 @@ jobs:
 
       # codecov.io
       - run: test -e target/site/jacoco/jacoco.xml || echo "Code coverage failed"
-      - run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      - codecov/upload
 
       - slack/notify:
           event: fail
