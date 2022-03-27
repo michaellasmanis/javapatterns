@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<licensePluginReport goal="CHECK" timestamp="1648357068781">
+    <module artifactId="javapatterns" groupId="com.lasmanis" version="1.2.126"/>
+    <files>
+        <file path="NOTICE" result="PRESENT"/>
+        <file path="pom.xml" result="PRESENT"/>
+        <file path="src/checkstyle/suppressions.xml" result="PRESENT"/>
+        <file path="src/main/java/com/lasmanis/javapatterns/Singleton.java" result="PRESENT"/>
+        <file path="src/main/java/com/lasmanis/javapatterns/package-info.java" result="PRESENT"/>
+        <file path="src/site/site.xml" result="PRESENT"/>
+        <file path="src/test/java/com/lasmanis/javapatterns/SingletonTest.java" result="PRESENT"/>
+        <file path="src/test/java/com/lasmanis/javapatterns/singletonhelpers/BadContainer.java" result="PRESENT"/>
+        <file path="src/test/java/com/lasmanis/javapatterns/singletonhelpers/IntegerContainer.java" result="PRESENT"/>
+        <file path="src/test/java/com/lasmanis/javapatterns/singletonhelpers/StringContainer.java" result="PRESENT"/>
+    </files>
+</licensePluginReport>
