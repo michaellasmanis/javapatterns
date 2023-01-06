@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="CHECK" timestamp="1672414077903">
-    <module artifactId="javapatterns" groupId="com.lasmanis" version="1.2.146"/>
+<licensePluginReport goal="CHECK" timestamp="1672967986933">
+    <module artifactId="javapatterns" groupId="com.lasmanis" version="1.2.149"/>
     <files>
         <file path="NOTICE" result="PRESENT"/>
         <file path="pom.xml" result="PRESENT"/>
