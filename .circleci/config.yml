@@ -129,14 +129,6 @@ jobs:
       - run: test -e target/site/jacoco/jacoco.xml || echo "Code coverage failed"
       - codecov/upload
 
-      - slack/notify:
-          event: fail
-          template: basic_fail_1
-
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1
-
 workflows:
   build-workflow:
     jobs:
